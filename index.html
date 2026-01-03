@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spaceman Injector Bot v1.1</title>
+    <style>
+        :root {
+            --primary-bg: #0b0e18;
+            --accent-cyan: #00bcd4;
+            --accent-blue: #1e3a8a;
+            --text-blue: #4db8ff;
+            --dark-panel: rgba(10, 10, 15, 0.9);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: white;
+            background: black url('https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGExb3B3bWt4cmIxMGsyb2UyZHhzYTF4ZWwzd2F4OGx1dm54aGNociZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zMaCuiamKtuMM/giphy.gif') no-repeat center center fixed;
+            background-size: cover;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .main-card {
+            width: 90%;
+            max-width: 400px;
+            background: rgba(35, 15, 60, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 188, 212, 0.3);
+            border: 1px solid rgba(0, 188, 212, 0.4);
+            text-align: center;
+            z-index: 1;
+        }
+
+        .top-banner {
+            background: #6a0b37;
+            padding: 15px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .game-info { background: rgba(0, 0, 0, 0.6); padding: 15px; }
+        .game-info img { width: 90px; border-radius: 50%; border: 2px solid var(--accent-cyan); margin-bottom: 8px; }
+
+        .content { padding: 20px; }
+
+        input[type="text"] {
+            width: 100%; padding: 12px; margin: 15px 0;
+            border-radius: 8px; border: 1px solid var(--accent-cyan);
+            background: rgba(0,0,0,0.7); color: white;
+            box-sizing: border-box; text-align: center; font-size: 1rem; outline: none;
+        }
+
+        /* --- PERBAIKAN TOMBOL SIMETRIS --- */
+        .btn {
+            display: block; 
+            width: 100%; 
+            padding: 15px 0; /* Padding atas-bawah konsisten */
+            margin: 10px 0;
+            border: none; 
+            border-radius: 10px; 
+            font-weight: bold;
+            cursor: pointer; 
+            text-transform: uppercase; 
+            transition: 0.3s;
+            text-decoration: none;
+            box-sizing: border-box; /* Memastikan lebar tetap 100% termasuk padding */
+            text-align: center;    /* Memastikan teks DAFTAR AKUN di tengah */
+        }
+
+        .btn-cyan { background: var(--accent-cyan); color: #000; }
+        .btn-blue { background: #0c4a6e; color: #fff; }
+        .btn:hover { filter: brightness(1.2); transform: scale(1.02); }
+
+        .creator-credits {
+            font-size: 0.7rem; color: #ccc; margin-top: 15px;
+            padding: 10px; border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .creator-name { color: var(--accent-cyan); font-weight: bold; }
+
+        #generator-ui {
+            display: none; background: var(--dark-panel);
+            margin: 15px; border-radius: 10px;
+            font-family: 'Courier New', monospace; text-align: left;
+        }
+
+        .console-body {
+            padding: 15px; font-size: 0.8rem; color: var(--text-blue);
+            height: 280px; overflow-y: auto;
+        }
+
+        .date-red { color: #ff4d4d; font-weight: bold; display: block; margin-bottom: 10px; text-align: center;}
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        <div id="landing-ui">
+            <div class="top-banner">AUTO BOT GENERATOR INJECT SERVER</div>
+            <div class="game-info">
+                <img src="https://i.ibb.co/5Wqh1BG6/Untitled-2.png" alt="Untitled-2" border="0"></a>
+                <div style="font-size: 0.7rem; color: #ddd;">SPACEMAN | PRAGMATIC PLAY</div>
+            </div>
+
+            <div class="content">
+                <p style="font-size: 0.85rem;">Algoritma injeksi server untuk memindai riwayat multiplier permainan.</p>
+                <a href="https://restu189.ink/fvcn" target="_blank" class="btn btn-cyan">DAFTAR AKUN</a>
+                <button class="btn btn-blue" onclick="showInputForm()">MULAI AUTO BOT</button>
+
+                <div class="creator-credits">
+                    Bot Developed by: <span class="creator-name">PASHA CYBER SYSTEM</span><br>
+                    © 2026 Powered by Pragmatic Server
+                </div>
+            </div>
+        </div>
+
+        <div id="input-ui" style="display: none;">
+            <div class="top-banner">SINKRONISASI DATA</div>
+            <div class="content">
+                <p style="font-size: 0.85rem;">Masukkan <b style="color:var(--accent-cyan)">USER ID</b> terdaftar Anda untuk akses signal.</p>
+                <input type="text" id="user-id" placeholder="ID PEMAIN">
+                <button class="btn btn-cyan" onclick="validateAndStart()">AKTIVASI SEKARANG</button>
+                <div class="creator-credits">
+                    Bot Verified by: <span class="creator-name">PASHA CYBER SYSTEM</span><br>
+                    Status: <span style="color: lime;">Secure - Encrypted</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="generator-ui">
+            <div class="top-banner" style="background:#222">INJECTING SYSTEM...</div>
+            <div class="console-body" id="console-logs">
+                <span id="current-date" class="date-red"></span>
+            </div>
+            <button id="btn-final" class="btn btn-cyan" style="display:none; width: 90%; margin: 10px auto;" onclick="window.location.href='https://bosdeal88.vip/iarr'">
+                MAIN SEKARANG
+            </button>
+        </div>
+    </div>
+
+    <audio id="sound-scan" src="https://www.soundjay.com/buttons/sounds/button-29.mp3"></audio>
+    <audio id="sound-success" src="https://www.soundjay.com/buttons/sounds/button-09.mp3"></audio>
+
+    <script>
+        function playSound(id) {
+            const sound = document.getElementById(id);
+            sound.currentTime = 0;
+            sound.play().catch(e => console.log("Audio play blocked"));
+        }
+
+        function showInputForm() {
+            document.getElementById('landing-ui').style.display = 'none';
+            document.getElementById('input-ui').style.display = 'block';
+        }
+
+        function validateAndStart() {
+            const id = document.getElementById('user-id').value;
+            if(!id) { alert("Input User ID wajib diisi!"); return; }
+
+            document.getElementById('input-ui').style.display = 'none';
+            document.getElementById('generator-ui').style.display = 'block';
+            
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').innerText = new Date().toLocaleDateString('id-ID', options);
+
+            runSequence(id);
+        }
+
+        async function runSequence(id) {
+            const body = document.getElementById('console-logs');
+            const logs = [
+                `> INITIALIZING BOT FOR ID: ${id}...`,
+                "> CONNECTING TO CLOUD SERVER...",
+                "> BYPASSING ANTI-CHEAT...",
+                "> FETCHING REAL-TIME DATA..."
+            ];
+
+            for(let log of logs) {
+                playSound('sound-scan');
+                body.innerHTML += `<div style="margin-bottom:8px;">${log}</div>`;
+                body.scrollTop = body.scrollHeight;
+                await new Promise(r => setTimeout(r, 700));
+            }
+
+            for(let i = 0; i < 5; i++) {
+                let t = new Date();
+                t.setMinutes(t.getMinutes() + (i * 6) + 5);
+                let ts = t.getHours().toString().padStart(2, '0') + "." + t.getMinutes().toString().padStart(2, '0');
+                
+                let min = (Math.random() * 2 + 1).toFixed(2);
+                let max = (Math.random() * 10 + 5).toFixed(2);
+
+                body.innerHTML += `<div style="margin: 12px 0; color:white; border-bottom: 1px dashed #444; padding-bottom: 5px;">
+                    ${ts} - Min ${min}x - Max ${max}x ==> <br>
+                    <span style="color:var(--accent-cyan); text-decoration:underline;">Sinyal Terdeteksi</span>
+                </div>`;
+                body.scrollTop = body.scrollHeight;
+                await new Promise(r => setTimeout(r, 1000));
+            }
+
+            playSound('sound-success');
+            if (navigator.vibrate) navigator.vibrate([200, 100, 200]); 
+            
+            body.innerHTML += `<div style="color:lime; text-align:center; padding-top:10px; font-weight:bold;">PROSES SELESAI! 🚀</div>`;
+            document.getElementById('btn-final').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
